@@ -33,10 +33,10 @@ interface Employee {
     zip: string;
     password: string;
     NIC: string;
-    birthday: moment.Moment;
+    birthday: string;
     accountNumber: string;
     bankName: string;
-    membershipDate: moment.Moment;
+    membershipDate: string;
     _id: string;
     role: string;
 }
