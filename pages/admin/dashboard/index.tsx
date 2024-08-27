@@ -31,7 +31,7 @@ import PaginationButtons from '../../../components/PaginationButtons';
 import LineWithLabel from '../../../components/sells-chart';
 import LineWithLabel1 from '../../../components/sock-monthly';
 import ColumnBasic from '../../../components/ColumnBasic';
-
+import Chart, { IChartOptions } from '../../../components/extras/Chart';
 import PieBasic from '../../../components/top-product-chart';
 
 
@@ -66,6 +66,8 @@ interface Stock {
 	currentquentity: string;
 	stockHistory: { stockout: string; date: string }[];
 }
+
+
 // Define the functional component for the index page
 const Index: NextPage = () => {
 	const { darkModeStatus } = useDarkMode(); // Dark mode
@@ -223,6 +225,31 @@ const Index: NextPage = () => {
 		setData(graphData);
 	}, [stock]); // Update graph data whenever stock changes
 	// Return the JSX for rendering the page
+
+	
+	const [state] = useState<IChartOptions>({
+		series: [44, 55, 13, 43, 22],
+		options: {
+			chart: {
+				width: 380,
+				type: 'pie',
+			},
+			labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+			responsive: [
+				{
+					breakpoint: 480,
+					options: {
+						chart: {
+							width: 200,
+						},
+						legend: {
+							position: 'bottom',
+						},
+					},
+				},
+			],
+		},
+	});
 	return (
 		<PageWrapper>
 			<Page>
@@ -237,6 +264,29 @@ const Index: NextPage = () => {
 				
 				<LineWithLabel />
 				<LineWithLabel1 /> */}
+				<div className='col-lg-6'>
+			<Card stretch>
+				<CardHeader>
+					<CardLabel icon='PieChart'>
+						<CardTitle>
+							LOT <small>analytics</small>
+						</CardTitle>
+						{/* <CardSubTitle>Chart</CardSubTitle> */}
+					</CardLabel>
+					{/* <CardActions>
+						<CommonStoryBtn to='/story/extra-chart-pie-donut--pie-basic' />
+					</CardActions> */}
+				</CardHeader>
+				<CardBody>
+					<Chart
+						series={state.series}
+						options={state.options}
+						type={state.options.chart?.type}
+						width={state.options.chart?.width}
+					/>
+				</CardBody>
+			</Card>
+		</div>
 
 				</div>
 				
